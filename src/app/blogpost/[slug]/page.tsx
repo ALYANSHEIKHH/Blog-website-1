@@ -12,21 +12,16 @@ import { transformerCopyButton } from '@rehype-pretty/transformers';
 import OnThisPage from "@/components/onthispage";
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeSlug from 'rehype-slug';
-import path from "path"; // Ensure you import the path module
+import path from "path";
 
-
-interface PageProps {
-  params: {
-    slug: string;
-  };
+interface Params {
+  slug: string;
 }
 
-export default async function Page({ params }: PageProps) {
-  const { slug } = params; // No need to await here
+export default async function Page({ params }: { params: Params }) {
+  const { slug } = params;
 
-  // Ensure slug matches the file name
-  const filepath = path.join(process.cwd(), "src", "content", `${slug}.md`); // Ensure the file exists
-
+  const filepath = path.join(process.cwd(), "src", "content", `${slug}.md`);
   if (!fs.existsSync(filepath)) { 
     notFound(); 
     return; 
@@ -48,7 +43,7 @@ export default async function Page({ params }: PageProps) {
       transformers: [
         transformerCopyButton({
           visibility: 'always',
-          feedbackDuration: 3_000,
+          feedbackDuration: 3000,
         }),
       ],
     });
@@ -58,14 +53,15 @@ export default async function Page({ params }: PageProps) {
   return (
     <div className="max-w-6xl mx-auto p-4">
       <h1 className="text-4xl font-bold mb-4">{data.title}</h1>
-      <p className="text-base mb-2 border-l-4 border-gray-500 pl-4 italic">&quot;{data.description}&quot;</p>
+      <p className="text-base mb-2 border-l-4 border-gray-500 pl-4 italic">
+        &quot;{data.description}&quot;
+      </p>
       <div className="flex gap-2">
-  <p className="text-sm text-gray-500 mb-4 italic">By {data.author}</p>
-  <p className="text-sm text-gray-500 mb-4">
-    {new Date(data.date).toLocaleDateString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' })}
-  </p>
-</div>
-
+        <p className="text-sm text-gray-500 mb-4 italic">By {data.author}</p>
+        <p className="text-sm text-gray-500 mb-4">
+          {new Date(data.date).toLocaleDateString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' })}
+        </p>
+      </div>
       <div dangerouslySetInnerHTML={{ __html: htmlContent }} className="prose dark:prose-invert"></div>
       <OnThisPage htmlContent={htmlContent} />
     </div>
