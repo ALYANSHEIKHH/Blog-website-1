@@ -1,4 +1,4 @@
-"use client";
+"use client"; // Indicates this component is a client component in Next.js
 import React, { useEffect, useState } from 'react';
 
 interface Heading {
@@ -18,12 +18,18 @@ const OnThisPage: React.FC<OnThisPageProps> = ({ htmlContent }) => {
     const tempDiv = document.createElement('div');
     tempDiv.innerHTML = htmlContent;
     const h2Elements = tempDiv.querySelectorAll('h2');
+
     const h2Data: Heading[] = Array.from(h2Elements).map(h2 => ({
-      text: h2.textContent,
-      id: h2.id
-    }));
+      text: h2.textContent || null, // Ensure text is not undefined
+      id: h2.id || null              // Ensure id is not undefined
+    })).filter(heading => heading.text); // Filter out any headings without text
+
     setHeadings(h2Data);
   }, [htmlContent]);
+
+  
+     
+
 
   return (
     <div className="on-this-page absolute top-24 md:right-48 lg:right-1/4 hidden lg:block">

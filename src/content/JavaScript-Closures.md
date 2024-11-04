@@ -7,6 +7,11 @@ author: Alyan Sheikh
 image: /P23.png
 ---
 
+## How Closures Work  
+
+When a function is created in JavaScript, a new scope is created. If that function contains another function, the inner function forms a closure, which captures the scope of the outer function.  
+
+ 
 Closures are one of the most powerful and commonly used features in JavaScript, enabling data privacy, callback patterns, and functional programming paradigms. Understanding closures allows developers to write cleaner, more modular code and effectively utilize JavaScript’s lexical scoping.
 
 ## What is a Closure?
