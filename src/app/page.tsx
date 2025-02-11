@@ -29,7 +29,7 @@ const blogs = [
       title: "Understanding JavaScript Closures",
       description: "A deep dive into closures and how they work in JavaScript.",
       image: "/P23.png",
-      link: "/content/understanding-javascript-closures", // Updated link
+      link: "/content/JavaScript-Closures", // Updated link
   },
   {
       title: "Mastering CSS Flexbox",
